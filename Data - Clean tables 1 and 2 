@@ -1,0 +1,113 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/danielamaruani-png/CODINGWEBSITE/blob/main/Data%20-%20Clean%20tables%201%20and%202%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "def clean_adhd_dataset(input_path, output_filename):\n",
+        "    \"\"\"\n",
+        "    Performs data wrangling and harmonization on raw ADHD intervention data.\n",
+        "    Transitions raw extracted values into a standardized format for analysis.\n",
+        "    \"\"\"\n",
+        "    # 1. Load raw data (skipping the title row and without assuming a header)\n",
+        "    # The raw files do not have the desired column names as headers; they need to be assigned.\n",
+        "    df = pd.read_csv(input_path, skiprows=1, header=None)\n",
+        "\n",
+        "    # 2. Define the structural mapping\n",
+        "    # This step selects only the columns required for the final website dashboard\n",
+        "    required_columns = [\n",
+        "        'source', 'method', 'study_design', 'outcome_domain', 'outcome_name',\n",
+        "        'rater', 'instrument', 'effect_type', 'timepoint', 'effect_value',\n",
+        "        'CI_low', 'CI_high', 'p_value', 'N_treat', 'N_ctrl', 'time_category', 'notes'\n",
+        "    ]\n",
+        "\n",
+        "    # Ensure the DataFrame has the correct number of columns and assign the new names.\n",
+        "    # The raw file seems to have more columns than `required_columns`, so we'll slice it.\n",
+        "    if df.shape[1] >= len(required_columns):\n",
+        "        df = df.iloc[:, :len(required_columns)] # Keep only the first `len(required_columns)` columns\n",
+        "        df.columns = required_columns # Assign the desired column names\n",
+        "    else:\n",
+        "        raise ValueError(f\"Raw data file {input_path} has fewer columns ({df.shape[1]}) than expected ({len(required_columns)}).\")\n",
+        "\n",
+        "    # No need for df.columns.str.strip() as we've directly assigned names\n",
+        "\n",
+        "    # Filtering the dataframe is no longer strictly necessary with direct assignment,\n",
+        "    # but we'll keep the variable name for consistency if further filtering were needed.\n",
+        "    df_standardized = df.copy()\n",
+        "\n",
+        "    # 3. Data Type Normalization\n",
+        "    # Converting effect sizes and sample sizes to numeric types to ensure analytical readiness\n",
+        "    numeric_columns = ['effect_value', 'CI_low', 'CI_high', 'N_treat', 'N_ctrl']\n",
+        "    for col in numeric_columns:\n",
+        "        # Coerce errors to NaN, allowing for non-numeric data in these columns to be handled.\n",
+        "        df_standardized[col] = pd.to_numeric(df_standardized[col], errors='coerce')\n",
+        "\n",
+        "    # 4. Export formatted CSV\n",
+        "    # Re-inserting the specific header name on the first line to match the project's requirements\n",
+        "    with open(output_filename, 'w', encoding='utf-8') as f:\n",
+        "        f.write(f\"{output_filename.replace('.csv', '')}\\n\")\n",
+        "        df_standardized.to_csv(f, index=False)\n",
+        "\n",
+        "    print(f\"Transformation complete: {input_path} -> {output_filename}\")\n",
+        "\n",
+        "# --- MAIN EXECUTION PIPELINE ---\n",
+        "\n",
+        "# Step 1: Process Post-Treatment data\n",
+        "clean_adhd_dataset(\n",
+        "    input_path='ADHD_NFB_MBI_POST_TREATMENT_raw.csv',\n",
+        "    output_filename='POST_TREATMENT_clean_final.csv'\n",
+        ")\n",
+        "\n",
+        "# Step 2: Process Follow-Up data\n",
+        "clean_adhd_dataset(\n",
+        "    input_path='ADHD_NFB_MBI_FOLLOW_UP_raw.csv',\n",
+        "    output_filename='FOLLOW_UP_6_13M_clean_final.csv'\n",
+        ")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "a93aUaEySu_G",
+        "outputId": "a8366379-0fc7-4879-f4e8-f05252df459d"
+      },
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Transformation complete: ADHD_NFB_MBI_POST_TREATMENT_raw.csv -> POST_TREATMENT_clean_final.csv\n",
+            "Transformation complete: ADHD_NFB_MBI_FOLLOW_UP_raw.csv -> FOLLOW_UP_6_13M_clean_final.csv\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
