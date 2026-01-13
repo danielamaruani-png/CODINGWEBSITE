@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyOl2idSfNhSHju3C7nVpC4D",
+      "authorship_tag": "ABX9TyPgVP4FjcsLAaREFBqEIlQ/",
       "include_colab_link": true
     },
     "kernelspec": {
@@ -23,7 +23,7 @@
         "colab_type": "text"
       },
       "source": [
-        "<a href=\"https://colab.research.google.com/github/danielamaruani-png/CODINGWEBSITE/blob/main/Part%204%20Forest%20Plot%20Analysis%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+        "<a href=\"https://colab.research.google.com/github/danielamaruani-png/CODINGWEBSITE/blob/main/Analysis%20-%20Figures%203%20and%204\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
       ]
     },
     {
@@ -32,10 +32,10 @@
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/",
-          "height": 849
+          "height": 569
         },
         "id": "9rQozUFC7DV_",
-        "outputId": "3a493447-37c1-4233-8fc9-6be20e9f1336"
+        "outputId": "222078bf-d0ee-4bab-fab0-be2c1e38939d"
       },
       "outputs": [
         {
@@ -64,21 +64,16 @@
         "import numpy as np\n",
         "import matplotlib.pyplot as plt\n",
         "\n",
-        "# Load data\n",
         "post_df = pd.read_csv(\"/content/POST_TREATMENT_clean_final.csv\")\n",
         "\n",
-        "# Colours (as agreed)\n",
-        "NFB_COLOR = \"#F4D03F\"   # yellow\n",
-        "MBI_COLOR = \"#2ECC71\"   # green\n",
+        "NFB_COLOR = \"#F4D03F\"\n",
+        "MBI_COLOR = \"#2ECC71\"\n",
         "\n",
-        "# Keep required columns only\n",
         "df = post_df.dropna(subset=[\"effect_value\", \"CI_low\", \"CI_high\", \"method\"]).copy()\n",
         "\n",
-        "# Order: NFB first, then MBI\n",
+        "\n",
         "df[\"method_order\"] = df[\"method\"].map({\"NFB\": 0, \"MBI\": 1})\n",
         "df = df.sort_values(\"method_order\").reset_index(drop=True)\n",
-        "\n",
-        "# Create labels (NFB-01, NFB-02, MBI-01, ...)\n",
         "labels = []\n",
         "counts = {\"NFB\": 0, \"MBI\": 0}\n",
         "for m in df[\"method\"]:\n",
@@ -86,10 +81,8 @@
         "    labels.append(f\"{m}-{counts[m]:02d}\")\n",
         "df[\"label\"] = labels\n",
         "\n",
-        "# Y positions\n",
         "y = np.arange(len(df))[::-1]\n",
         "\n",
-        "# Plot\n",
         "fig, ax = plt.subplots(figsize=(10, 5.5))\n",
         "ax.axvline(0, linestyle=\"--\", linewidth=1)\n",
         "\n",
@@ -98,13 +91,11 @@
         "    ax.plot([row[\"CI_low\"], row[\"CI_high\"]], [yi, yi], color=color, linewidth=2)\n",
         "    ax.scatter(row[\"effect_value\"], yi, color=color, s=55, zorder=3)\n",
         "\n",
-        "# Axes and title\n",
         "ax.set_yticks(y)\n",
         "ax.set_yticklabels(df[\"label\"])\n",
         "ax.set_xlabel(\"Standardised effect size (Hedges' g)\")\n",
         "ax.set_title(\"Forest plot — Post-treatment effects (descriptive)\")\n",
         "\n",
-        "# Legend\n",
         "ax.scatter([], [], color=NFB_COLOR, label=\"Neurofeedback (NFB)\")\n",
         "ax.scatter([], [], color=MBI_COLOR, label=\"Mindfulness-based interventions (MBI)\")\n",
         "ax.legend(frameon=False, loc=\"lower right\")\n",
@@ -112,7 +103,6 @@
         "plt.tight_layout()\n",
         "plt.show()\n",
         "\n",
-        "# Forest plot- follow up (6-13 months)\n",
         "\n",
         "import pandas as pd\n",
         "import numpy as np\n",
@@ -121,18 +111,14 @@
         "# Load data\n",
         "follow_df = pd.read_csv(\"/content/FOLLOW_UP_6_13M_clean_final.csv\")\n",
         "\n",
-        "# Colours\n",
-        "NFB_COLOR = \"#F4D03F\"   # yellow\n",
-        "MBI_COLOR = \"#2ECC71\"   # green\n",
+        "NFB_COLOR = \"#F4D03F\"\n",
+        "MBI_COLOR = \"#2ECC71\"\n",
         "\n",
-        "# Keep required columns only\n",
         "df = follow_df.dropna(subset=[\"effect_value\", \"CI_low\", \"CI_high\", \"method\"]).copy()\n",
         "\n",
-        "# Order: NFB first, then MBI\n",
         "df[\"method_order\"] = df[\"method\"].map({\"NFB\": 0, \"MBI\": 1})\n",
         "df = df.sort_values(\"method_order\").reset_index(drop=True)\n",
         "\n",
-        "# Create labels\n",
         "labels = []\n",
         "counts = {\"NFB\": 0, \"MBI\": 0}\n",
         "for m in df[\"method\"]:\n",
@@ -140,10 +126,8 @@
         "    labels.append(f\"{m}-{counts[m]:02d}\")\n",
         "df[\"label\"] = labels\n",
         "\n",
-        "# Y positions\n",
         "y = np.arange(len(df))[::-1]\n",
         "\n",
-        "# Plot\n",
         "fig, ax = plt.subplots(figsize=(10, 5.5))\n",
         "ax.axvline(0, linestyle=\"--\", linewidth=1)\n",
         "\n",
@@ -152,13 +136,12 @@
         "    ax.plot([row[\"CI_low\"], row[\"CI_high\"]], [yi, yi], color=color, linewidth=2)\n",
         "    ax.scatter(row[\"effect_value\"], yi, color=color, s=55, zorder=3)\n",
         "\n",
-        "# Axes and title\n",
         "ax.set_yticks(y)\n",
         "ax.set_yticklabels(df[\"label\"])\n",
         "ax.set_xlabel(\"Standardised effect size (Hedges' g)\")\n",
         "ax.set_title(\"Forest plot — Follow-up effects (≈ 6–13 months, descriptive)\")\n",
         "\n",
-        "# Legend\n",
+        "\n",
         "ax.scatter([], [], color=NFB_COLOR, label=\"Neurofeedback (NFB)\")\n",
         "ax.scatter([], [], color=MBI_COLOR, label=\"Mindfulness-based interventions (MBI)\")\n",
         "ax.legend(frameon=False, loc=\"lower right\")\n",
