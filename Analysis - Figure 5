@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyPzy7TzaU9PaGJOmbmQsVjn",
+      "authorship_tag": "ABX9TyNW/SmB6/05se8IiUOV6NoF",
       "include_colab_link": true
     },
     "kernelspec": {
@@ -23,7 +23,7 @@
         "colab_type": "text"
       },
       "source": [
-        "<a href=\"https://colab.research.google.com/github/danielamaruani-png/CODINGWEBSITE/blob/main/Part%204%20Bar%20chart%20Analysis%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+        "<a href=\"https://colab.research.google.com/github/danielamaruani-png/CODINGWEBSITE/blob/main/Analysis%20-%20Figure%205\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
       ]
     },
     {
@@ -32,10 +32,10 @@
       "metadata": {
         "colab": {
           "base_uri": "https://localhost:8080/",
-          "height": 242
+          "height": 507
         },
         "id": "PifXREOQ6bXU",
-        "outputId": "ca88aede-0b22-43e7-aa25-818c4860d939"
+        "outputId": "818a92a3-b650-44ad-9351-d4292eac3f52"
       },
       "outputs": [
         {
@@ -54,7 +54,6 @@
         "import pandas as pd\n",
         "import matplotlib.pyplot as plt\n",
         "\n",
-        "# --- Data ---\n",
         "domains = [\"Inattention / Attention\", \"Hyperactivity / Impulsivity\", \"ADHD overall\"]\n",
         "\n",
         "data = pd.DataFrame({\n",
@@ -65,7 +64,6 @@
         "    \"MBI Follow-up\": [0.370, 0.640, 0.340]\n",
         "})\n",
         "\n",
-        "# --- Plot ---\n",
         "x = np.arange(len(domains))\n",
         "width = 0.2\n",
         "\n",
