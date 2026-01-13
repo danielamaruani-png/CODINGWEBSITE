@@ -7,69 +7,53 @@
         "colab_type": "text"
       },
       "source": [
-        "<a href=\"https://colab.research.google.com/github/danielamaruani-png/CODINGWEBSITE/blob/main/Graph%20part%201%20and%202\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+        "<a href=\"https://colab.research.google.com/github/danielamaruani-png/CODINGWEBSITE/blob/main/Analysis%20-%20Figures%201%20and%202\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
       ]
     },
     {
       "cell_type": "code",
       "source": [
-        "# Dot plot (point plot) for mean Hedges' g by symptom domain\n",
-        "# Paste into Google Colab and run.\n",
+        "\n",
         "\n",
         "import numpy as np\n",
         "import matplotlib.pyplot as plt\n",
         "\n",
-        "# -------------------------\n",
-        "# INPUT DATA (edit if needed)\n",
-        "# -------------------------\n",
         "domains = [\"Inattention / Attention\", \"Hyperactivity / Impulsivity\", \"ADHD overall\"]\n",
         "\n",
-        "# Post-treatment means and k\n",
         "nfb_mean = [0.222, 0.080, -0.490]\n",
         "nfb_k    = [6,     2,     1]\n",
         "\n",
-        "mbi_mean = [0.320, None,  0.770]   # None = no data (k=0)\n",
+        "mbi_mean = [0.320, None,  0.770]\n",
         "mbi_k    = [1,     0,     1]\n",
         "\n",
-        "# -------------------------\n",
-        "# PLOT\n",
-        "# -------------------------\n",
         "x = np.arange(len(domains))\n",
-        "offset = 0.12  # horizontal separation between NFB and MBI points\n",
+        "offset = 0.12\n",
         "\n",
         "fig, ax = plt.subplots(figsize=(10, 5))\n",
         "\n",
-        "# Reference line at 0\n",
+        "\n",
         "ax.axhline(0, linewidth=1)\n",
         "\n",
-        "# NFB points\n",
         "ax.scatter(x - offset, nfb_mean, s=80, label=\"Neurofeedback (NFB)\")\n",
         "\n",
-        "# Labels for NFB (k)\n",
         "for xi, yi, ki in zip(x - offset, nfb_mean, nfb_k):\n",
         "    ax.text(xi, yi, f\" k={ki}\", va=\"center\", ha=\"left\", fontsize=10)\n",
         "\n",
-        "# MBI points (skip missing)\n",
         "for i, (m, ki) in enumerate(zip(mbi_mean, mbi_k)):\n",
         "    if m is None or ki == 0:\n",
         "        continue\n",
         "    ax.scatter(x[i] + offset, m, s=80, label=\"Mindfulness-based interventions (MBI)\" if i == 0 else None)\n",
         "    ax.text(x[i] + offset, m, f\" k={ki}\", va=\"center\", ha=\"left\", fontsize=10)\n",
         "\n",
-        "# Axes / ticks\n",
         "ax.set_xticks(x)\n",
         "ax.set_xticklabels(domains, rotation=20, ha=\"right\")\n",
         "ax.set_ylabel(\"Mean standardised effect size (Hedges' g)\")\n",
         "ax.set_title(\"Post-treatment mean effect sizes by symptom domain (dot plot)\")\n",
         "\n",
-        "# Legend\n",
         "ax.legend(frameon=False)\n",
         "\n",
         "plt.tight_layout()\n",
-        "plt.show()\n",
-        "\n",
-        "# Optional: save figure\n",
-        "# plt.savefig(\"post_treatment_dot_plot.png\", dpi=300, bbox_inches=\"tight\")"
+        "plt.show()\n"
       ],
       "metadata": {
         "colab": {
@@ -79,7 +63,7 @@
         "id": "HqXTAbh7diiA",
         "outputId": "09c2a3da-1b6d-4f08-fe3a-16c5925e1dd3"
       },
-      "execution_count": 1,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "display_data",
@@ -176,7 +160,7 @@
         "id": "CqQBVZWSdxLi",
         "outputId": "d13f15d4-3aa3-4752-c4fd-db22f5b5e7d6"
       },
-      "execution_count": 3,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "display_data",
