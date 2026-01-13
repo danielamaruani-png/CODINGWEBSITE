@@ -4,7 +4,7 @@
   "metadata": {
     "colab": {
       "provenance": [],
-      "authorship_tag": "ABX9TyM5cg6iYC54Y2DpLrnwE8tc",
+      "authorship_tag": "ABX9TyOUlp0Emt9zjmFoThGFrUVo",
       "include_colab_link": true
     },
     "kernelspec": {
@@ -23,7 +23,7 @@
         "colab_type": "text"
       },
       "source": [
-        "<a href=\"https://colab.research.google.com/github/danielamaruani-png/CODINGWEBSITE/blob/main/raw_data_set%20file%201%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+        "<a href=\"https://colab.research.google.com/github/danielamaruani-png/CODINGWEBSITE/blob/main/Data%20-%20Raw%20data%20set%20(Tables%201%20and%202)\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
       ]
     },
     {
@@ -38,39 +38,31 @@
         "]\n",
         "\n",
         "rows_post = [\n",
-        "    # --- Springer 2019 (within pre→post) ---\n",
+        "\n",
         "    [\"Springer 2019\",\"NFB\",\"SR+MA\",\"Attention\",\"Inattention\",\"mixed\",\"multiple*\",\"within\",\"pre→post\",\"NA\",\"SMD\",0.64,0.45,0.82,\"<0.001\",256,\"NA\",\"pooled within-group\"],\n",
         "    [\"Springer 2019\",\"NFB\",\"SR+MA\",\"Hyperactivity\",\"Hyperactivity/Impulsivity\",\"mixed\",\"multiple*\",\"within\",\"pre→post\",\"NA\",\"SMD\",0.50,0.33,0.68,\"<0.001\",256,\"NA\",\"\"],\n",
         "\n",
-        "    # --- Springer 2019 (between pre→post) ---\n",
         "    [\"Springer 2019\",\"NFB\",\"SR+MA\",\"Attention\",\"Inattention\",\"mixed\",\"multiple*\",\"between\",\"pre→post\",\"NA\",\"SMD\",0.38,0.14,0.61,\"0.002\",256,250,\"non-active ctrl\"],\n",
         "    [\"Springer 2019\",\"NFB\",\"SR+MA\",\"Attention\",\"Inattention\",\"mixed\",\"multiple*\",\"between\",\"pre→post\",\"NA\",\"SMD\",-0.44,-0.86,-0.02,\"0.04\",256,250,\"active ctrl (MPH)\"],\n",
         "\n",
-        "    # --- Frontiers 2014 (post) ---\n",
         "    [\"Frontiers 2014\",\"NFB\",\"MA\",\"ADHD\",\"ADHD total\",\"parent\",\"ADHD-RS*\",\"between\",\"post\",\"NA\",\"SMD\",-0.49,-0.74,-0.24,\"<0.001\",146,117,\"sign inverted*\"],\n",
         "    [\"Frontiers 2014\",\"NFB\",\"MA\",\"Attention\",\"Inattention\",\"parent\",\"ADHD-RS*\",\"between\",\"post\",\"NA\",\"SMD\",-0.46,-0.76,-0.15,\"0.003\",146,117,\"\"],\n",
         "    [\"Frontiers 2014\",\"NFB\",\"MA\",\"Hyperactivity\",\"Hyperactivity/Impulsivity\",\"parent\",\"ADHD-RS*\",\"between\",\"post\",\"NA\",\"SMD\",-0.34,-0.59,-0.09,\"0.007\",146,117,\"\"],\n",
         "    [\"Frontiers 2014\",\"NFB\",\"MA\",\"Attention\",\"Inattention\",\"teacher\",\"ADHD-RS*\",\"between\",\"post\",\"NA\",\"SMD\",-0.30,-0.58,-0.03,\"0.03\",146,117,\"probably blinded\"],\n",
         "\n",
-        "    # --- Arnold 2021 (within pre→post) ---\n",
-        "    [\"Arnold 2021\",\"NFB\",\"RCT\",\"Attention\",\"Inattention composite\",\"parent+teacher\",\"DSM-5\",\"within\",\"pre→post\",\"NA\",\"d\",1.51,1.18,1.85,\"<0.001\",84,\"NA\",\"within NF\"],\n",
-        "\n",
-        "    # --- Lee 2022 (post) ---\n",
+        "    [\"Arnold 2021\",\"NFB\",\"RCT\",\"Attention\",\"Inattention composite\",\"parent+teacher\",\"DSM-5\",\"within\",\"pre→post\",\"NA\",\"d\",1.51,1.18,1.85,\"<0.001\",84,\"NA\",\"within NF\"]\n",
         "    [\"Lee 2022\",\"MBI\",\"SR+MA\",\"ADHD\",\"ADHD symptoms\",\"mixed\",\"multiple*\",\"between\",\"post\",\"NA\",\"g\",0.77,0.22,1.33,\"0.006\",\"NA\",\"NA\",\"high heterogeneity\"],\n",
         "\n",
-        "    # --- MindChamp 2022 (within pre→post) ---\n",
+        "\n",
         "    [\"MindChamp 2022\",\"MBI\",\"RCT\",\"Attention\",\"Inattentiveness\",\"parent\",\"Conners\",\"within\",\"pre→post\",\"NA\",\"d\",0.32,\"NA\",\"NA\",\"NA\",55,48,\"\"],\n",
         "\n",
-        "    # --- MYmind protocol (planned pre→post, pas de résultats) ---\n",
         "    [\"MYmind protocol\",\"MBI\",\"RCT-protocol\",\"Attention\",\"Attention\",\"NA\",\"TEA-Ch\",\"planned\",\"pre→post\",\"planned\",\"NA\",\"NA\",\"NA\",\"NA\",\"NA\",70,70,\"no results yet\"],\n",
         "\n",
-        "    # --- Single-session 2022 (post, FU=1 mois annoncé, mais mesure post incluse) ---\n",
         "    [\"Single-session 2022\",\"MBI\",\"RCT\",\"Physiology\",\"Cardiac vagal control\",\"NA\",\"HRV (RMSSD)\",\"between\",\"post\",\"1\",\"d\",0.37,\"NA\",\"NA\",\"<0.05\",35,35,\"physiological outcome\"],\n",
         "]\n",
         "\n",
         "post_df = pd.DataFrame(rows_post, columns=columns)\n",
         "\n",
-        "# Export\n",
         "post_df.to_csv(\"ADHD_NFB_MBI_POST_TREATMENT_raw.csv\", index=False)\n",
         "post_df.to_excel(\"ADHD_NFB_MBI_POST_TREATMENT_raw.xlsx\", index=False)\n",
         "\n",
