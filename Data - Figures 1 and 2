@@ -32,7 +32,6 @@
         "import seaborn as sns\n",
         "import matplotlib.pyplot as plt\n",
         "\n",
-        "# 1. Chargement et préparation\n",
         "df_post = pd.read_csv('/content/POST_TREATMENT_clean_final.csv')\n",
         "df_fu = pd.read_csv('/content/FOLLOW_UP_6_13M_clean_final.csv')\n",
         "df_post.columns = df_post.columns.str.strip()\n",
@@ -41,10 +40,10 @@
         "df_all = pd.concat([df_post, df_fu], ignore_index=True)\n",
         "df_all['effect_value'] = pd.to_numeric(df_all['effect_value'], errors='coerce')\n",
         "\n",
-        "# Mapping des couleurs demandé\n",
-        "custom_palette = {\"NFB\": \"#1f77b4\", \"MBI\": \"#ff7f0e\"} # Bleu et Orange\n",
         "\n",
-        "# --- FIGURE 1 : Boxplots of Effect Sizes ---\n",
+        "custom_palette = {\"NFB\": \"#1f77b4\", \"MBI\": \"#ff7f0e\"}\n",
+        "\n",
+        "\n",
         "plt.figure(figsize=(10, 6))\n",
         "sns.boxplot(data=df_all, x='time_category', y='effect_value', hue='method',\n",
         "            palette=custom_palette, width=0.6)\n",
@@ -54,12 +53,10 @@
         "plt.tight_layout()\n",
         "plt.savefig('boxplot_distribution.png', dpi=300)\n",
         "\n",
-        "# --- FIGURE 2 : Temporal Line Plot ---\n",
         "plt.figure(figsize=(10, 6))\n",
-        "# On calcule la moyenne pour chaque groupe à chaque temps\n",
+        "\n",
         "line_data = df_all.groupby(['time_category', 'method'])['effect_value'].mean().reset_index()\n",
         "\n",
-        "# Pour que l'axe X soit dans l'ordre chronologique\n",
         "line_data['time_category'] = pd.Categorical(line_data['time_category'],\n",
         "                                            categories=['Post-treatment', 'Follow-up (6–13 months)'],\n",
         "                                            ordered=True)\n",
@@ -71,7 +68,7 @@
         "plt.title('Figure 2: Mean Effect Size Trajectory (T1 → T2)', fontsize=14)\n",
         "plt.ylabel('Mean Effect Size (g)')\n",
         "plt.xlabel('Timepoint')\n",
-        "plt.ylim(0, 1) # Ajuster selon tes données\n",
+        "plt.ylim(0, 1)\n",
         "plt.grid(True, linestyle='--', alpha=0.6)\n",
         "plt.tight_layout()\n",
         "plt.savefig('temporal_trajectory.png', dpi=300)\n",
@@ -86,7 +83,7 @@
         "id": "EwmrmuUhPKoQ",
         "outputId": "42222c0b-cc24-4812-a274-35ada295c6f6"
       },
-      "execution_count": 5,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "display_data",
@@ -122,7 +119,7 @@
       "source": [
         "print(df_all.columns)"
       ],
-      "execution_count": 4,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
@@ -152,7 +149,7 @@
         "# List all files and directories in the current working directory\n",
         "print(os.listdir('.'))"
       ],
-      "execution_count": 2,
+      "execution_count": null,
       "outputs": [
         {
           "output_type": "stream",
